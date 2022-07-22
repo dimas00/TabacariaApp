@@ -8,6 +8,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <%@page isELIgnored="false" %>
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <html>
 <head>
@@ -29,10 +30,24 @@
 <div class="card">
     <h5 class="card-header">Cadastro de Produtos </h5>
     <div class="card-body">
-       <form action="cadastro_produto" method="post">
+       <form action="/TabaricaApp/produto/cadastrar" method="post">
 
         <%--@declare id="nome"--%><%--@declare id="email"--%><%--@declare id="senha"--%><%--@declare id="preco"--%>
         <%--@declare id="quantidade"--%>
+
+<form:form method="post" action="/TabaricaApp/produto/cadastrar" modelAttribute="produto">
+
+    <form:label path="nome">nome</form:label>
+    <form:input path="nome"  type="text"></form:input>
+
+    <form:label path="preco">Preço</form:label>
+    <form:input path="preco"  type="text"></form:input>
+
+    <form:label path="quantidade">Quantidade</form:label>
+    <form:input path="quantidade"  type="text"></form:input>
+
+    <form:label path="descricao">Quantidade</form:label>
+    <form:input path="descricao"  type="text"></form:input>
 
         <label for="nome"> <b>Nome<b> </label>
         <input type="text" placeholder="email" name="nome" required> <br>
@@ -53,7 +68,7 @@
 
 
         <input type="submit" value="Cadastrar" name="Cadastrar" class="btn btn-primary" >
-            <a href="controlador?opcao=voltar" class="btn btn-secondary"  > VOLTAR </a>
+            <a href="/TabaricaApp/home" class="btn btn-secondary"  > VOLTAR </a>
 
 
     </form>

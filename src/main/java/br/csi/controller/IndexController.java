@@ -12,22 +12,27 @@ public class IndexController {
 
     ProdutoDao pDao = new ProdutoDao();
 
-    @GetMapping("/login")
-    public String login(){
-        return "login" ;
-
+    @GetMapping("/")
+    public RedirectView indexController() {
+        return new RedirectView("/home", true);
     }
 
-    @GetMapping("/produtos")
+    @GetMapping("/home")
     public String produtos(Model model) {
         model.addAttribute("produtos", pDao.getProdutos());
 
         return "visualizarproduto";
     }
 
-    @GetMapping("/")
-    public RedirectView indexController() {
-        return new RedirectView("/produtos", true);
+    @GetMapping("/produtos")
+    public String cadastrar_produtos(Model model) {
+        model.addAttribute("produtos", pDao.getProdutos());
+
+        return "produtos";
     }
+
+
+
+
 
 }

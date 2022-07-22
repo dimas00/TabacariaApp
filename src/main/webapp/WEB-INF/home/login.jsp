@@ -120,7 +120,7 @@
 
 
 <main class="form-signin w-100 m-auto">
-    <form action="/TabaricaApp/login/login" method="post" >
+    <form action="/TabaricaApp/login/autenticar" method="post" >
       <!--  <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
         <h1 class="h3 mb-3 fw-normal">Fazer Login</h1>
 

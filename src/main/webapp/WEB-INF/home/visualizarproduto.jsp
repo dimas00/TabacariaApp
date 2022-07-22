@@ -95,14 +95,14 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="controlador?opcao=login">Fazer login </a>
+                            <a class="nav-link active" aria-current="page" href="/TabaricaApp/login/">Fazer login </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="controlador?opcao=cadastro"> CADASTRAR CLIENTE</a>
+                            <a class="nav-link" href="/TabaricaApp/cliente"> CADASTRAR CLIENTE</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="controlador?opcao=produto"> CADASTRAR PRODUTO</a>
+                            <a class="nav-link" href="/TabaricaApp/produto/cadastrar"> CADASTRAR PRODUTO</a>
                         </li>
 
                         <li class="nav-item dropdown">
