@@ -102,7 +102,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/TabaricaApp/produto/cadastrar"> CADASTRAR PRODUTO</a>
+                            <a class="nav-link" href="/TabaricaApp/produto/listar"> CADASTRAR PRODUTO</a>
                         </li>
 
                         <li class="nav-item dropdown">

@@ -4,59 +4,34 @@ import br.csi.dao.ProdutoDao;
 import br.csi.model.Produto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @Controller
 @RequestMapping("/produto")
 public class CadastroProdutoController {
 
-    @GetMapping("/cadastrar")
-    public String addproduto(Model model){
+    ProdutoDao pdao = new ProdutoDao();
 
-        model.addAttribute("produto", new Produto());
+    @GetMapping("/listar")
+    public String addProduto(@ModelAttribute("produto") Produto produto, Model model) {
+        model.addAttribute("produtos", pdao.getProdutos());
 
-        return "produto";
+        return "produtos";
     }
-
-    @PostMapping("")
-    public String cadastrar(@RequestParam String nome, @RequestParam  String quantidade, @RequestParam  String preco, @RequestParam  String img, @RequestParam  String descricao, HttpServletRequest req, Model model ) {
-
-
-        RequestDispatcher rd;
-
-        Produto produto = new Produto();
-
-        produto.setNome(nome);
-        produto.setQuantidade(Integer.parseInt(quantidade));
-        produto.setPreco(Float.parseFloat(preco));
-        produto.setDescricao(descricao);
-
-        if(new ProdutoDao().Cadastrar(produto)) {
-            System.out.println("cadastrou");
-            req.setAttribute("retorno", "Cadastro feito com sucesso");
-
-            return "produto";
-
-        }else {
-
-            System.out.println("deu ruim");
-            req.setAttribute("retorno", "Erro no cadastro");
-
-            return "produto";
+    
+    @PostMapping("/cadastrar")
+    public RedirectView cadastrar(@ModelAttribute("produto") Produto produto, RedirectAttributes redirect) {
+        if (pdao.Cadastrar(produto)) {
+            redirect.addFlashAttribute("retorno", "Cadastro feito com sucesso");
+        } else {
+            redirect.addFlashAttribute("retorno", "Erro no cadastro");
         }
 
-
-
+        return new RedirectView("/produto/listar", true);
     }
 }

@@ -6,7 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
-<%@page isELIgnored="false" %>
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
@@ -30,48 +29,35 @@
 <div class="card">
     <h5 class="card-header">Cadastro de Produtos </h5>
     <div class="card-body">
-       <form action="/TabaricaApp/produto/cadastrar" method="post">
 
-        <%--@declare id="nome"--%><%--@declare id="email"--%><%--@declare id="senha"--%><%--@declare id="preco"--%>
-        <%--@declare id="quantidade"--%>
 
 <form:form method="post" action="/TabaricaApp/produto/cadastrar" modelAttribute="produto">
 
-    <form:label path="nome">nome</form:label>
-    <form:input path="nome"  type="text"></form:input>
+    <form:label path="nome">Nome</form:label>
+    <form:input path="nome"  type="text"></form:input> <br>
+    <br>
 
     <form:label path="preco">Preço</form:label>
-    <form:input path="preco"  type="text"></form:input>
+    <form:input path="preco"  type="text"></form:input><br>
+    <br>
 
     <form:label path="quantidade">Quantidade</form:label>
-    <form:input path="quantidade"  type="text"></form:input>
+    <form:input path="quantidade"  type="text" value=""></form:input><br>
+    <br>
 
-    <form:label path="descricao">Quantidade</form:label>
-    <form:input path="descricao"  type="text"></form:input>
-
-        <label for="nome"> <b>Nome<b> </label>
-        <input type="text" placeholder="email" name="nome" required> <br>
-        <br>
-
-        <label for="preco"> <b>Preço<b> </label>
-        <input type="number" placeholder="preco" name="preco" required><br>
-
-        <br>
-
-        <label for="quantidade"> <b>Quantidade<b> </label>
-        <input type="number" placeholder="quantidade"  name="quantidade" required><br>
-        <br>
-
-            <label for="quantidade"> <b>Descrição<b> </label>
-            <input type="text" placeholder="descricao"  name="descricao" required><br>
-            <br>
+    <form:label path="descricao">Descrição</form:label>
+    <form:input path="descricao"  type="text"></form:input><br>
+    <br>
+    <input type="submit" value="Cadastrar" name="Cadastrar" class="btn btn-primary" >
+</form:form>
 
 
-        <input type="submit" value="Cadastrar" name="Cadastrar" class="btn btn-primary" >
+
             <a href="/TabaricaApp/home" class="btn btn-secondary"  > VOLTAR </a>
 
 
     </form>
+
         <c:if test="${not empty retorno}">
             <div class="alert alert-success" role="alert">
                     ${retorno}
@@ -94,7 +80,7 @@
     <div class="container">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
-            <c:forEach var = "produto" items="${produtos}">
+            <c:forEach items="${produtos}" var="produto">
 
                 <div class="col">
 
@@ -102,17 +88,17 @@
                         <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
                             <title>
 
-                            </title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">${produto.preco}</text></svg>
+                            </title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em"> </text></svg>
 
                         <div class="card-body">
-                            <p class="card-text"> ${produto.nome}    </p>
+                            <p class="card-text"> ${produto.nome} - R$${produto.preco}0    </p>
                             <p> <small class="text-muted"> ${produto.descricao} </small> </p>
                             <div class="d-flex justify-content-between align-items-center">
 
 
-
-                               <p> <div class="btn-group">
-                                <a type="button" class="btn btn-primary" value="editar" href="http://localhost:8080/App_Bic/editar?id=${produto.id}" > Editar </a></p>
+<!--href="TabaricaApp/produto/editar?id=${produto.id}" -->
+                              <div class="btn-group">
+                                <a  class="btn btn-primary"  href="<c:url value="/produto/editar?id=${produto.id}"/>"  > Editar </a>
 
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                     Excluir
@@ -155,4 +141,3 @@
 <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-

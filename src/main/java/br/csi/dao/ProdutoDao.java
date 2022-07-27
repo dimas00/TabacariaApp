@@ -62,7 +62,7 @@ public class ProdutoDao {
                 produto.setId((resultSet.getInt("id_produto")));
                 produto.setDescricao(resultSet.getString("descricao"));
                 produtos.add(produto);
-                System.out.println(resultSet.getString("nome"));
+
 
             }
 
@@ -99,9 +99,6 @@ public class ProdutoDao {
                 produto.setId((resultSet.getInt("id_produto")));
                 produto.setDescricao((resultSet.getString("descricao")));
 
-
-
-                System.out.println(resultSet.getString("nome"));
 
             }
 
