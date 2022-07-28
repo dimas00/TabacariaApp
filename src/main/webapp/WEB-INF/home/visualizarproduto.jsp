@@ -98,7 +98,7 @@
                             <a class="nav-link active" aria-current="page" href="/TabaricaApp/login/">Fazer login </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/TabaricaApp/cliente"> CADASTRAR CLIENTE</a>
+                            <a class="nav-link" href="<c:url value="/cadastro/redirect"/>"> Cadastre-se</a>
                         </li>
 
                         <li class="nav-item">

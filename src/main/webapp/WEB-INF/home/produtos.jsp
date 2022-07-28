@@ -49,11 +49,12 @@
     <form:input path="descricao"  type="text"></form:input><br>
     <br>
     <input type="submit" value="Cadastrar" name="Cadastrar" class="btn btn-primary" >
+    <a href="/TabaricaApp/home" class="btn btn-secondary"  > VOLTAR </a>
 </form:form>
 
 
 
-            <a href="/TabaricaApp/home" class="btn btn-secondary"  > VOLTAR </a>
+
 
 
     </form>
@@ -118,7 +119,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
-                                                <a type="button" class="btn btn-danger" href="http://localhost:8080/App_Bic/excluir?id=${produto.id}" >Excluir</a>
+                                                <a type="button" class="btn btn-danger" href="<c:url value="/produto/excluir?id=${produto.id}"/>" >Excluir</a>
                                             </div>
                                         </div>
                                     </div>

@@ -6,6 +6,7 @@ import br.csi.service.UsuarioService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -22,7 +23,7 @@ public class LoginController {
 
 
     @PostMapping("/autenticar")
-    public String autenticar(@RequestParam String email, @RequestParam  String senha, HttpServletRequest req, Model model ){
+    public String autenticar(@RequestParam String email, @RequestParam  String senha, HttpServletRequest req, Model model, RedirectAttributes redirect){
         Usuario usuario = new UsuarioService().autenticado(email, senha);
 
         System.out.println( email + senha);
@@ -38,7 +39,9 @@ public class LoginController {
             return "visualizarproduto";
 
         }else {
+            redirect.addFlashAttribute("erro", "Email ou senha incorreto");
             return "login";
+
         }
 
     }

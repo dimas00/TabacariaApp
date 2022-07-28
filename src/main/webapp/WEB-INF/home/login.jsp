@@ -150,10 +150,10 @@
         </div>
          </c:if>
 
-        <c:if test="${not empty msg}">
+        <c:if test="${not empty erro}">
 
             <div class="alert alert-success" role="alert">
-                    ${msg}
+                    ${erro}
             </div>
 
         </c:if>

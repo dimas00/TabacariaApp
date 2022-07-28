@@ -44,7 +44,7 @@ public class UsuarioDao {
         return usuario;
     }
 
-    public String cadastrar(Usuario usuario) {
+    public String Cadastrar(Usuario usuario) {
 
 
 

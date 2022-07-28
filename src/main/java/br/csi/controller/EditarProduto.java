@@ -25,20 +25,41 @@ public class EditarProduto {
     }
 
     @PostMapping("editar")
-    public String editar_produto(@ModelAttribute("produto") Produto produto, RedirectAttributes attributes) {
+    public Object editar_produto(@ModelAttribute("produto") Produto produto, RedirectAttributes attributes) {
 
-        RedirectView redirect = new RedirectView("/livro/adicionar", true);
-        new LivroService().addLivro(livro);
+        if(new ProdutoDao().Editar(produto)) {
+            System.out.println("cadastrou");
+            attributes.addFlashAttribute("retorno","Edição feita com sucesso");
+            RedirectView redirect = new RedirectView("/produto/listar", true);
+            return redirect;
+        }else {
 
-        attributes.addFlashAttribute("addSucesso",true);
+            System.out.println("deu ruim");
 
+            attributes.addFlashAttribute("retorno",true);
+        }
+        return false;
+    }
 
-        return redirect;
+    @GetMapping("/excluir")
+    public Object excluir(@RequestParam int id, Model model, RedirectAttributes attributes ){
 
+        Produto produto = new ProdutoDao().getProduto1(id);
 
+        if(new ProdutoDao().Editar(produto)) {
+            System.out.println("excluiu");
+            attributes.addFlashAttribute("retorno","Exclusão realizada com sucesso");
+            RedirectView redirect = new RedirectView("/produto/listar", true);
+            return redirect;
 
+        }else {
 
+            System.out.println("deu ruim");
 
+            attributes.addFlashAttribute("retorno","Erro ao excluir");
+            RedirectView redirect = new RedirectView("/produto/listar", true);
+            return redirect;
+        }
 
     }
 

@@ -27,7 +27,7 @@ public class UsuarioService {
     }
     public boolean CadastrarUsuario(Usuario u){
 
-        String retorno = new UsuarioDao().cadastrar(u);
+        String retorno = new UsuarioDao().Cadastrar(u);
 
         if(retorno.equals("ok")){
 
