@@ -10,7 +10,7 @@ public class Usuario {
     private String senha;
     private Date dataCadastro;
     private boolean ativo;
-    private Permissao permissao;
+    private int permissao;
 
     public int getId() {
         return id;
@@ -60,11 +60,11 @@ public class Usuario {
         this.ativo = ativo;
     }
 
-    public Permissao getPermissao() {
+    public int getPermissao() {
         return permissao;
     }
 
-    public void setPermissao(Permissao permissao) {
+    public void setPermissao(int permissao) {
         this.permissao = permissao;
     }
 }

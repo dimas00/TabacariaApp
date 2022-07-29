@@ -24,7 +24,7 @@
 
             <img src="<c:url value="/img/icon.png"/>" />
             <c:if test="${ empty usuario_logado}">
-            <a class="navbar-brand" href="#">Olá Cliente</a>
+                <a class="navbar-brand" href="#">Olá Cliente</a>
             </c:if>
 
             <c:if test="${not empty usuario_logado}">
@@ -65,24 +65,24 @@
                         </c:if>
 
 
-<%--                        <li class="nav-item dropdown">--%>
-<%--                            <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarLgDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">--%>
-<%--                                Dropdown--%>
-<%--                            </a>--%>
-<%--                            <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarLgDropdown">--%>
-<%--                                <li><a class="dropdown-item" href="#">Action</a></li>--%>
-<%--                                <li><a class="dropdown-item" href="#">Another action</a></li>--%>
-<%--                                <li>--%>
-<%--                                    <hr class="dropdown-divider">--%>
-<%--                                </li>--%>
-<%--                                <li><a class="dropdown-item" href="/TabaricaApp/login/sair">Sair</a></li>--%>
-<%--                            </ul>--%>
-<%--                        </li>--%>
-<%--                    </ul>--%>
-<%--                    <form class="d-flex mt-3 mt-lg-0" role="search">--%>
-<%--                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">--%>
-<%--                        <button class="btn btn-outline-success" type="submit">Search</button>--%>
-<%--                    </form>--%>
+                        <%--                        <li class="nav-item dropdown">--%>
+                        <%--                            <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarLgDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">--%>
+                        <%--                                Dropdown--%>
+                        <%--                            </a>--%>
+                        <%--                            <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarLgDropdown">--%>
+                        <%--                                <li><a class="dropdown-item" href="#">Action</a></li>--%>
+                        <%--                                <li><a class="dropdown-item" href="#">Another action</a></li>--%>
+                        <%--                                <li>--%>
+                        <%--                                    <hr class="dropdown-divider">--%>
+                        <%--                                </li>--%>
+                        <%--                                <li><a class="dropdown-item" href="/TabaricaApp/login/sair">Sair</a></li>--%>
+                        <%--                            </ul>--%>
+                        <%--                        </li>--%>
+                        <%--                    </ul>--%>
+                        <%--                    <form class="d-flex mt-3 mt-lg-0" role="search">--%>
+                        <%--                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">--%>
+                        <%--                        <button class="btn btn-outline-success" type="submit">Search</button>--%>
+                        <%--                    </form>--%>
                 </div>
             </div>
         </div>
@@ -95,32 +95,26 @@
         <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
-<c:forEach var = "produto" items="${produtos}">
-    <div class="col">
-     <div class="card shadow-sm">
+                <c:forEach var = "produto" items="${produtos}">
+                    <div class="col">
+                        <div class="card shadow-sm">
 
-                        <img src="<c:url value="/img/logo-cathafire.png"/>">
+                            <img src="<c:url value="/img/logo-cathafire.png"/>">
 
 
-                        <div class="card-body">
-                            <p class="card-text"> ${produto.nome} - R$${produto.preco}0 </p>
-                            <p> <small class="text-muted">${produto.descricao} </small> </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <c:if test="${not empty usuario_logado}">
-                                        <a  href="<c:url value="/compra/produto?id_produto=${produto.id}&id_usuario=${usuario_logado.id}"/>"><button type="button" class="btn btn-success"  >Comprar </button></a>
-                                    </c:if>
-
-                                    <c:if test="${ empty usuario_logado}">
-                                        <a  href="<c:url value="/login"/>"><button type="button" class="btn btn-success"  >Comprar </button></a>
-                                    </c:if>
-
+                            <div class="card-body">
+                                <p class="card-text"> ${produto.nome} - R$${produto.preco}0 </p>
+                                <p> <small class="text-muted">${produto.descricao} </small> </p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-success" >Comprar</button>
+                                        <a  href="<c:url value="/compra/produto?id_produto=${produto.id}&id_usuario=${usuario_logado.id}"/>"><button type="button" class="btn btn-info"  >Adicionar ao Carrinho </button></a>
+                                    </div>
+                                    <small class="text-muted">9 mins</small>
                                 </div>
-                                <small class="text-muted">9 mins</small>
                             </div>
                         </div>
                     </div>
-                </div>
                 </c:forEach>
 
             </div>

@@ -1,5 +1,6 @@
 package br.csi.dao;
 
+import br.csi.model.Compra;
 import br.csi.model.Produto;
 
 import java.sql.*;
@@ -88,8 +89,6 @@ public class ProdutoDao {
             this.preparedStatement.setInt(1, id);
 
             this.resultSet = this.preparedStatement.executeQuery();
-
-
 
             while (resultSet.next()){
 
@@ -220,6 +219,74 @@ public class ProdutoDao {
         }
 
         return false;
+    }
+
+    public boolean Comprar(int id_usuario,int id_produto) {
+
+
+
+        try(Connection connection = new ConectaDB().getConexao()){
+
+            this.sql = "INSERT INTO compra ( id_usuario, id_produto, data_compra )"+
+                    "  values (?, ?,current_date)";
+
+            this.preparedStatement = connection.prepareStatement(this.sql, preparedStatement.RETURN_GENERATED_KEYS);
+            this.preparedStatement.setInt(1, id_usuario);
+            this.preparedStatement.setInt(2, id_produto);
+
+
+
+            this.preparedStatement.execute();
+            this.resultSet = this.preparedStatement.getGeneratedKeys();
+            this.resultSet.next();
+            if(this.resultSet.getInt(1) > 0){
+
+               Compra.setid_compra(this.resultSet.getInt(1));
+                this.status = "ok";
+            }
+
+
+        }catch (SQLException | ClassNotFoundException e){
+            e.printStackTrace();
+            this.status = "erro";
+            return false;
+        }
+
+        return false;
+    }
+
+    public Produto getCompra(int id){
+
+        Produto produto = new Produto();
+        try (Connection connection = new ConectaDB().getConexao()) {
+
+            this.sql = "select produtos.id_produto,produtos.nome, produtos.preco, produtos.quantidade, produtos.descricao from produtos, compra, usuario \n" +
+                    "where produtos.id_produto = compra.id_produto \n" +
+                    "and compra.id_usuario = usuario.id_usuario \n" +
+                    "and usuario.id_usuario=?";
+            this.preparedStatement = connection.prepareStatement(this.sql);
+            this.preparedStatement.setInt(1, id);
+
+            this.resultSet = this.preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+
+                produto.setNome(resultSet.getString("nome"));
+                produto.setPreco(resultSet.getFloat("preco"));
+                produto.setQuantidade(resultSet.getInt("quantidade"));
+                produto.setId((resultSet.getInt("id_produto")));
+                produto.setDescricao((resultSet.getString("descricao")));
+
+
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return produto;
     }
 
 

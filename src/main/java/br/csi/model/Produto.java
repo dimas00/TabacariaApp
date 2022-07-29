@@ -8,6 +8,8 @@ public class Produto {
     private int quantidade;
     private String descricao;
 
+
+
     public int getId() {
         return id;
     }
