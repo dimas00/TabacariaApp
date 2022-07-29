@@ -12,24 +12,19 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-
-
-
     <title>Produtos</title>
-
 
 </head>
 
-
 <body>
-
 <main>
-
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
         <div class="container-fluid">
+
+
+
             <a class="navbar-brand" href="#">Olá ${usuario_logado.nome}</a>
-            <img src="https://drive.google.com/file/d/1SquEqQ4MaTlC5eR7cf2Kbwlg_7gT5a99/view?usp=sharing">
+            <img src="<c:url value="/img/icon.png"/>" />
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -40,35 +35,48 @@
                 </div>
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <c:if test="${empty usuario_logado}">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/TabaricaApp/login/">Fazer login </a>
+                            <a class="nav-link " aria-current="page" href="/TabaricaApp/login/">Fazer login </a>
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="<c:url value="/cadastro/redirect"/>"> Cadastre-se</a>
                         </li>
+                        </c:if>
+
+                        <c:if test="${ usuario_logado.permissao == 1}">
 
                         <li class="nav-item">
                             <a class="nav-link" href="/TabaricaApp/produto/listar"> CADASTRAR PRODUTO</a>
                         </li>
+                        </c:if>
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarLgDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarLgDropdown">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
+                        <c:if test="${not empty usuario_logado}">
+                        <li class="nav-item">
+                            <a class="nav-link"href="/TabaricaApp/login/sair"> Sair</a>
                         </li>
-                    </ul>
-                    <form class="d-flex mt-3 mt-lg-0" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
+                        </c:if>
+
+
+<%--                        <li class="nav-item dropdown">--%>
+<%--                            <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarLgDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">--%>
+<%--                                Dropdown--%>
+<%--                            </a>--%>
+<%--                            <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarLgDropdown">--%>
+<%--                                <li><a class="dropdown-item" href="#">Action</a></li>--%>
+<%--                                <li><a class="dropdown-item" href="#">Another action</a></li>--%>
+<%--                                <li>--%>
+<%--                                    <hr class="dropdown-divider">--%>
+<%--                                </li>--%>
+<%--                                <li><a class="dropdown-item" href="/TabaricaApp/login/sair">Sair</a></li>--%>
+<%--                            </ul>--%>
+<%--                        </li>--%>
+<%--                    </ul>--%>
+<%--                    <form class="d-flex mt-3 mt-lg-0" role="search">--%>
+<%--                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">--%>
+<%--                        <button class="btn btn-outline-success" type="submit">Search</button>--%>
+<%--                    </form>--%>
                 </div>
             </div>
         </div>
@@ -85,7 +93,7 @@
     <div class="col">
      <div class="card shadow-sm">
 
-                        <img src="../img/logo-cathafire.png">
+                        <img src="<c:url value="/img/logo-cathafire.png"/>">
 
 
                         <div class="card-body">

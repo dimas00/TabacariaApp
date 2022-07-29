@@ -36,7 +36,7 @@ public class LoginController {
         if(usuario != null){
             ProdutoDao pDao = new ProdutoDao();
             model.addAttribute("produtos", pDao.getProdutos());
-
+            System.out.println("usuario logado "+ usuario.getPermissao());
             return new RedirectView("/home", true);
 
         }else {
@@ -45,6 +45,11 @@ public class LoginController {
 
         }
 
+    }
+    @GetMapping("/sair")
+    public RedirectView sair(HttpSession session){
+        session.invalidate();
+        return new RedirectView("/home", true);
     }
 
 }

@@ -106,22 +106,13 @@
         }
     </style>
 
-
     <!-- Custom styles for this template -->
     <link href="signin.css" rel="stylesheet">
 </head>
-
-
-
-
 <body class="text-center">
-
-
-
-
 <main class="form-signin w-100 m-auto">
     <form action="/TabaricaApp/login/autenticar" method="post" >
-      <!--  <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
+        <a href="/TabaricaApp/home"><img src="<c:url value="/img/logo-cathafire.png"/>" class="mb-4"  alt="" width="150" height="150"></a>
         <h1 class="h3 mb-3 fw-normal">Fazer Login</h1>
 
         <div class="form-floating">
@@ -158,24 +149,9 @@
 
         </c:if>
 
-
-
-
-
-
     </form>
 </main>
-
-
-
-
-
-
 </body>
 </html>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
-
-
-
-

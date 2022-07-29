@@ -19,7 +19,7 @@ public class UsuarioDao {
 
         try (Connection connection = new ConectaDB().getConexao()) {
 
-            this.sql = "SELECT id_usuario, nome, email, senha  FROM usuario WHERE email = ? ; ";
+            this.sql = "SELECT id_usuario, nome, email, senha, id_permissao  FROM usuario WHERE email = ? ; ";
             System.out.println(this.sql);
             preparedStatement = connection.prepareStatement(this.sql);
             preparedStatement.setString(1, email);
@@ -31,6 +31,10 @@ public class UsuarioDao {
                 usuario.setNome(resultSet.getString("nome").toLowerCase());
                 usuario.setEmail(resultSet.getString("email"));
                 usuario.setSenha(resultSet.getString("senha"));
+                usuario.setPermissao(resultSet.getInt("id_permissao"));
+
+
+                System.out.println();
 
             }
 
@@ -50,14 +54,15 @@ public class UsuarioDao {
 
         try(Connection connection = new ConectaDB().getConexao()){
 
-            this.sql = "INSERT INTO usuario (nome, email, senha, data_cadastro, ativo )"+
-                    "  values (?, ?, ?, current_date , ?)";
+            this.sql = "INSERT INTO usuario (nome, email, senha, data_cadastro, ativo, id_permissao )"+
+                    "  values (?, ?, ?, current_date , ? , 2)";
 
             this.preparedStatement = connection.prepareStatement(this.sql, preparedStatement.RETURN_GENERATED_KEYS);
             this.preparedStatement.setString(1, usuario.getNome());
             this.preparedStatement.setString(2, usuario.getEmail());
             this.preparedStatement.setString(3, usuario.getSenha());
             this.preparedStatement.setBoolean(4, usuario.isAtivo());
+
 
             this.preparedStatement.execute();
             this.resultSet = this.preparedStatement.getGeneratedKeys();
