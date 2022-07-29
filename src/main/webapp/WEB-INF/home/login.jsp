@@ -140,7 +140,7 @@
         </div>
 
         <button class="w-100 btn btn-lg btn-primary" type="submit" value="Login" name="Login" >Login</button>
-        <a href="controlador?opcao=cadastro"><input class="w-100 btn btn-lg btn-primary" type="button" value="Cadastre-se" name="cadastro" /></a>
+        <a href="<c:url value="/cadastro/redirect"/>"><input class="w-100 btn btn-lg btn-primary" type="button" value="Cadastre-se" name="cadastro" /></a>
         <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
 
         <c:if test="${not empty erro}">
@@ -150,14 +150,13 @@
         </div>
          </c:if>
 
-        <c:if test="${not empty erro}">
+        <c:if test="${not empty msg}">
 
             <div class="alert alert-success" role="alert">
-                    ${erro}
+                    ${msg}
             </div>
 
         </c:if>
-
 
 
 

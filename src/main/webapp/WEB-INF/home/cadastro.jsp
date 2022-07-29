@@ -81,12 +81,12 @@
     </div>
 
     <div class="col-md-6">
-        <label for="inputEmail4" class="form-label">Email required </label>
-        <input type="email" class="form-control" id="inputEmail4" name="email" placeholder="Digite seu email:" >
+        <label for="inputEmail4" class="form-label">Email  </label>
+        <input type="email" class="form-control" id="inputEmail4" name="email" placeholder="Digite seu email:" required>
     </div>
     <div class="col-md-6">
-        <label for="inputPassword4" class="form-label">Senha required </label>
-        <input type="password" class="form-control" name="senha" id="inputPassword4" placeholder="Digite sua senha:">
+        <label for="inputPassword4" class="form-label">Senha  </label>
+        <input type="password" class="form-control" name="senha" id="inputPassword4" placeholder="Digite sua senha:" required>
     </div>
 
 

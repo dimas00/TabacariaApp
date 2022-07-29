@@ -28,13 +28,11 @@ public class CadastroController {
     @PostMapping("/cadastrar")
     public RedirectView cadastrar(@ModelAttribute("usuario") Usuario usuario, RedirectAttributes redirect) {
         if (new UsuarioService().CadastrarUsuario(usuario)) {
-            System.out.println("foi");
-            redirect.addFlashAttribute("retorno", "Cadastro feito com sucesso");
+            redirect.addFlashAttribute("msg", "Cadastro feito com sucesso");
             return new RedirectView("/login", true);
 
         } else {
-            System.out.println("nao foi");
-            redirect.addFlashAttribute("retorno", "Erro no cadastro");
+            redirect.addFlashAttribute("msg", "Erro no cadastro");
             return new RedirectView("/TabaricaApp/cadastro/cadastrar", true);
         }
 
