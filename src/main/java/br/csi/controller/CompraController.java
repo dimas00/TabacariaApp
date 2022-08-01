@@ -21,11 +21,11 @@ public class CompraController {
 
         model.addAttribute("id_usuario", id_usuario);
 
-        return "redirect:editar";
+        return "redirect:editar?id="+id_usuario;
     }
 
     @GetMapping("editar")
-    public Object exibirCompra(@ModelAttribute("id_usuario") int id,  Model model) {
+    public Object exibirCompra(@RequestParam("id") int id,  Model model) {
 
         Produto produto = new ProdutoDao().getCompra(id);
 

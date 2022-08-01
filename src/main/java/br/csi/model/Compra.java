@@ -6,6 +6,10 @@ public class Compra  {
 
     private int data_compra;
 
+    public Compra() {
+
+    }
+
     public int getId_compra() {
         return id_compra;
     }
