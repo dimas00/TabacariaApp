@@ -63,11 +63,7 @@ public class ProdutoDao {
                 produto.setId((resultSet.getInt("id_produto")));
                 produto.setDescricao(resultSet.getString("descricao"));
                 produtos.add(produto);
-
-
             }
-
-
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -255,9 +251,9 @@ public class ProdutoDao {
         return false;
     }
 
-    public Produto getCompra(int id){
+    public ArrayList<Produto> getCompra(int id){
 
-        Produto produto = new Produto();
+        ArrayList<Produto> produtos = new ArrayList<>();
         try (Connection connection = new ConectaDB().getConexao()) {
 
             this.sql = "select produtos.id_produto,produtos.nome, produtos.preco, produtos.quantidade, produtos.descricao from produtos, compra, usuario \n" +
@@ -270,23 +266,21 @@ public class ProdutoDao {
             this.resultSet = this.preparedStatement.executeQuery();
 
             while (resultSet.next()){
-
+                Produto produto = new Produto();
                 produto.setNome(resultSet.getString("nome"));
                 produto.setPreco(resultSet.getFloat("preco"));
                 produto.setQuantidade(resultSet.getInt("quantidade"));
                 produto.setId((resultSet.getInt("id_produto")));
                 produto.setDescricao((resultSet.getString("descricao")));
-
-
+                produtos.add(produto);
             }
-
 
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return produto;
+        return produtos;
     }
 
 

@@ -17,18 +17,20 @@
 </head>
 
 <body>
-<main>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
-        <div class="container-fluid">
+
+<nav class="navbar  navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
+    <div class="container-fluid">
 
 
-            <img src="<c:url value="/img/icon.png"/>" />
+        <a href="/TabaricaApp/home">  <img src="<c:url value="/img/icon.png"/>" /> <a/>
             <c:if test="${ empty usuario_logado}">
-            <a class="navbar-brand" href="#">Olá Cliente</a>
+            <a class="navbar-brand justify-content-center" href="#">Olá Cliente</a>
             </c:if>
 
             <c:if test="${not empty usuario_logado}">
-                <a class="navbar-brand" href="#">Olá  ${usuario_logado.nome} </a>
+            <div class="d-flex flex-row-reverse">
+                <div class="p-2"><a class="navbar-brand" href="#">Olá  ${usuario_logado.nome} </a></div>
+            </div>
             </c:if>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2">
@@ -51,6 +53,12 @@
                         </li>
                         </c:if>
 
+                        <c:if test="${not empty usuario_logado}">
+                        <li class="nav-item">
+                            <a class="nav-link" href="<c:url value="/compra/compras?id_usuario=${usuario_logado.id}"/>"> Compras</a>
+                        </li>
+                        </c:if>
+
                         <c:if test="${ usuario_logado.permissao == 1}">
 
                         <li class="nav-item">
@@ -65,28 +73,32 @@
                         </c:if>
 
 
-<%--                        <li class="nav-item dropdown">--%>
-<%--                            <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarLgDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">--%>
-<%--                                Dropdown--%>
-<%--                            </a>--%>
-<%--                            <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarLgDropdown">--%>
-<%--                                <li><a class="dropdown-item" href="#">Action</a></li>--%>
-<%--                                <li><a class="dropdown-item" href="#">Another action</a></li>--%>
-<%--                                <li>--%>
-<%--                                    <hr class="dropdown-divider">--%>
-<%--                                </li>--%>
-<%--                                <li><a class="dropdown-item" href="/TabaricaApp/login/sair">Sair</a></li>--%>
-<%--                            </ul>--%>
-<%--                        </li>--%>
-<%--                    </ul>--%>
-<%--                    <form class="d-flex mt-3 mt-lg-0" role="search">--%>
-<%--                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">--%>
-<%--                        <button class="btn btn-outline-success" type="submit">Search</button>--%>
-<%--                    </form>--%>
+                        <%--                        <li class="nav-item dropdown">--%>
+                        <%--                            <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarLgDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">--%>
+                        <%--                                Dropdown--%>
+                        <%--                            </a>--%>
+                        <%--                            <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarLgDropdown">--%>
+                        <%--                                <li><a class="dropdown-item" href="#">Action</a></li>--%>
+                        <%--                                <li><a class="dropdown-item" href="#">Another action</a></li>--%>
+                        <%--                                <li>--%>
+                        <%--                                    <hr class="dropdown-divider">--%>
+                        <%--                                </li>--%>
+                        <%--                                <li><a class="dropdown-item" href="/TabaricaApp/login/sair">Sair</a></li>--%>
+                        <%--                            </ul>--%>
+                        <%--                        </li>--%>
+                        <%--                    </ul>--%>
+                        <%--                    <form class="d-flex mt-3 mt-lg-0" role="search">--%>
+                        <%--                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">--%>
+                        <%--                        <button class="btn btn-outline-success" type="submit">Search</button>--%>
+                        <%--                    </form>--%>
                 </div>
             </div>
-        </div>
-    </nav>
+    </div>
+</nav>
+
+
+<main>
+
 
 
 

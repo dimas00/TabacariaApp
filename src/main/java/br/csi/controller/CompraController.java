@@ -11,7 +11,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 @RequestMapping("/compra")
 public class CompraController {
-
+    ProdutoDao produto = new ProdutoDao();
     @GetMapping("/produto")
     public String comprar(@RequestParam int id_produto, int id_usuario,  Model model) {
 
@@ -21,15 +21,12 @@ public class CompraController {
 
         model.addAttribute("id_usuario", id_usuario);
 
-        return "redirect:editar?id="+id_usuario;
+        return "redirect:compras?id_usuario="+id_usuario;
     }
 
-    @GetMapping("editar")
-    public Object exibirCompra(@RequestParam("id") int id,  Model model) {
-
-        Produto produto = new ProdutoDao().getCompra(id);
-
-            model.addAttribute("produto", produto);
+    @GetMapping("/compras")
+    public Object exibirCompra(@RequestParam("id_usuario") int id,  Model model) {
+            model.addAttribute("produtos", produto.getCompra(id));
 
             return "compras";
 

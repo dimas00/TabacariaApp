@@ -30,7 +30,7 @@
 
 
         <a class="navbar-brand" href="/TabaricaApp/home">Olá ${usuario_logado.nome}</a>
-        <img src="<c:url value="/img/icon.png"/>" />
+        <a href="/TabaricaApp/home"> <img src="<c:url value="/img/icon.png"/>" /><a/>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2">
             <span class="navbar-toggler-icon"></span>
         </button>
