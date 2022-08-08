@@ -18,18 +18,12 @@
 
 <body>
 <main>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
+    <nav class="navbar  navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
         <div class="container-fluid">
 
-
-            <a href="/TabaricaApp/home"><img src="<c:url value="/img/icon.png"/>" /><a/>
-            <c:if test="${ empty usuario_logado}">
-                <a class="navbar-brand" href="#">Olá Cliente</a>
-            </c:if>
-
-            <c:if test="${not empty usuario_logado}">
-                <a class="navbar-brand" href="#">Olá  ${usuario_logado.nome} </a>
-            </c:if>
+            <div class="d-flex flex-row-reverse">
+                <div class="p-2"><a class="navbar-brand" href="/TabaricaApp/home"> <img  src="<c:url value="/img/icon.png"/>" /></a> </div>
+            </div>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2">
                 <span class="navbar-toggler-icon"></span>
@@ -41,6 +35,16 @@
                 </div>
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+
+
+                        <li class="nav-item">
+                            <a class="nav-link " aria-current="page" href="/TabaricaApp/home/">  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+                                <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+                            </svg> </a>
+                        </li>
+
+
                         <c:if test="${empty usuario_logado}">
                         <li class="nav-item">
                             <a class="nav-link " aria-current="page" href="/TabaricaApp/login/">Fazer login </a>
@@ -49,16 +53,23 @@
                         <li class="nav-item">
                             <a class="nav-link" href="<c:url value="/cadastro/redirect"/>"> Cadastre-se</a>
                         </li>
+                        </c:if>
 
+                        <c:if test="${not empty usuario_logado}">
                         <li class="nav-item">
-                            <a class="nav-link" href="<c:url value="/compra/produto/compras?id_usuario=${usuario_logado.id}"/>"> Compras</a>
+                            <a class="nav-link active"  href="<c:url value="/compra/compras?id_usuario=${usuario_logado.id}"/>"> Compras</a>
                         </li>
                         </c:if>
 
                         <c:if test="${ usuario_logado.permissao == 1}">
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/TabaricaApp/produto/listar"> CADASTRAR PRODUTO</a>
+                            <a class="nav-link" href="/TabaricaApp/produto/listar"> Cadastrar Produtos</a>
+                        </li>
+                        </c:if>
+                        <c:if test="${not empty usuario_logado}">
+                        <li class="nav-item">
+                            <a class="nav-link " href="<c:url value="/cadastro/visualizar?email=${usuario_logado.email}"/>"> Conta</a>
                         </li>
                         </c:if>
 
@@ -69,39 +80,51 @@
                         </c:if>
 
 
-                        <%--                        <li class="nav-item dropdown">--%>
-                        <%--                            <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarLgDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">--%>
-                        <%--                                Dropdown--%>
-                        <%--                            </a>--%>
-                        <%--                            <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarLgDropdown">--%>
-                        <%--                                <li><a class="dropdown-item" href="#">Action</a></li>--%>
-                        <%--                                <li><a class="dropdown-item" href="#">Another action</a></li>--%>
-                        <%--                                <li>--%>
-                        <%--                                    <hr class="dropdown-divider">--%>
-                        <%--                                </li>--%>
-                        <%--                                <li><a class="dropdown-item" href="/TabaricaApp/login/sair">Sair</a></li>--%>
-                        <%--                            </ul>--%>
-                        <%--                        </li>--%>
-                        <%--                    </ul>--%>
-                        <%--                    <form class="d-flex mt-3 mt-lg-0" role="search">--%>
-                        <%--                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">--%>
-                        <%--                        <button class="btn btn-outline-success" type="submit">Search</button>--%>
-                        <%--                    </form>--%>
+
                 </div>
             </div>
         </div>
     </nav>
 
+
+
     <c:if test="${ empty produtos}">
+
         <h1>Você não possui compras</h1>
 
-    <a href="/TabaricaApp/home"> <button type="button"  class="btn btn-success" >Comprar</button> <a/>
+        <a href="/TabaricaApp/home"> <button type="button"  class="btn btn-success" >Comprar</button> <a/>
     </c:if>
 
 
     <div class="album py-5 bg-light">
+
+        <c:if test="${not empty produtos}">
+
+            <h1  class="text-center">Compras</h1> <br>
+
+        </c:if>
+
+
         <div class="container">
+
+<%--            <div class="card mb-3" style="max-width: 1113px;">--%>
+<%--                <div class="row g-0">--%>
+<%--                    <div class="col-md-4">--%>
+<%--                        <img src="..." class="img-fluid rounded-start" alt="...">--%>
+<%--                    </div>--%>
+<%--                    <div class="col-md-8">--%>
+<%--                        <div class="card-body">--%>
+<%--                            <h5 class="card-title">Card title</h5>--%>
+<%--                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>--%>
+<%--                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+
 
                 <c:forEach var = "produto" items="${produtos}">
                     <div class="col">
@@ -115,7 +138,7 @@
                                 <p class="card-text"> ${produto.nome} - R$${produto.preco}0 </p>
                                 <p> <small class="text-muted">${produto.descricao} </small> </p>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <small class="text-muted">9 mins</small>
+<%--                                    <small class="text-muted">Quantidade:  ${produto.quantidade} </small>--%>
                                 </div>
                             </div>
                         </div>

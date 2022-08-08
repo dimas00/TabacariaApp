@@ -24,13 +24,22 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
+<nav class="navbar  navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
 
+        <div class="d-flex flex-row-reverse">
+            <div class="p-2"><a class="navbar-brand" href="/TabaricaApp/home"> <img  src="<c:url value="/img/icon.png"/>" /></a> </div>
+        </div>
 
 
-        <a class="navbar-brand" href="/TabaricaApp/home">Olá ${usuario_logado.nome}</a>
-        <a href="/TabaricaApp/home"> <img src="<c:url value="/img/icon.png"/>" /><a/>
+
+        <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
+            <form action="/TabaricaApp/pesquisa/produtoCrud" method="post" class="d-flex mt-3 mt-lg-0" role="search">
+                <input class="form-control me-2"   name="pesquisa">
+                <button class="btn btn-outline-success" type="submit">Pesquisar</button>
+            </form>
+        </div>
+
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -41,6 +50,20 @@
             </div>
             <div class="offcanvas-body">
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+
+                    <c:if test="${ empty usuario_logado}">
+                    <li class="nav-item">
+                        <a class="navbar-brand " aria-current="page" href="/TabaricaApp/login/"> Olá Cliente </a>
+                    </li>
+                    </c:if>
+
+                    <c:if test="${not empty usuario_logado}">
+                    <li class="nav-item">
+                        <a class="navbar-brand " aria-current="page" href="/TabaricaApp/login/"> Olá  ${usuario_logado.nome} </a>
+                    </li>
+                    </c:if>
+
+
                     <c:if test="${empty usuario_logado}">
                     <li class="nav-item">
                         <a class="nav-link " aria-current="page" href="/TabaricaApp/login/">Fazer login </a>
@@ -51,10 +74,22 @@
                     </li>
                     </c:if>
 
+                    <c:if test="${not empty usuario_logado}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/compra/compras?id_usuario=${usuario_logado.id}"/>"> Compras</a>
+                    </li>
+                    </c:if>
+
                     <c:if test="${ usuario_logado.permissao == 1}">
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/TabaricaApp/produto/listar"> CADASTRAR PRODUTO</a>
+                        <a class="nav-link" href="/TabaricaApp/produto/listar"> Cadastrar produto</a>
+                    </li>
+                    </c:if>
+
+                    <c:if test="${not empty usuario_logado}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/cadastro/visualizar?email=${usuario_logado.email}"/>"> Conta</a>
                     </li>
                     </c:if>
 
@@ -63,30 +98,11 @@
                         <a class="nav-link"href="/TabaricaApp/login/sair"> Sair</a>
                     </li>
                     </c:if>
-
-
-                    <%--                        <li class="nav-item dropdown">--%>
-                    <%--                            <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarLgDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">--%>
-                    <%--                                Dropdown--%>
-                    <%--                            </a>--%>
-                    <%--                            <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarLgDropdown">--%>
-                    <%--                                <li><a class="dropdown-item" href="#">Action</a></li>--%>
-                    <%--                                <li><a class="dropdown-item" href="#">Another action</a></li>--%>
-                    <%--                                <li>--%>
-                    <%--                                    <hr class="dropdown-divider">--%>
-                    <%--                                </li>--%>
-                    <%--                                <li><a class="dropdown-item" href="/TabaricaApp/login/sair">Sair</a></li>--%>
-                    <%--                            </ul>--%>
-                    <%--                        </li>--%>
-                    <%--                    </ul>--%>
-                    <%--                    <form class="d-flex mt-3 mt-lg-0" role="search">--%>
-                    <%--                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">--%>
-                    <%--                        <button class="btn btn-outline-success" type="submit">Search</button>--%>
-                    <%--                    </form>--%>
             </div>
         </div>
     </div>
 </nav>
+
 
 <div class="album py-5 bg-light">
     <div class="container">
@@ -98,31 +114,29 @@
 
 <form:form method="post" action="/TabaricaApp/produto/cadastrar" modelAttribute="produto">
 
-    <form:label path="nome">Nome</form:label>
-    <form:input path="nome"  type="text"></form:input> <br>
-    <br>
+    <div class="mb-3">
+        <form:label path="nome" for="inputAddress" class="form-label" >Nome</form:label>
+        <form:input path="nome" required="required" type="text" class="form-control" ></form:input>
+    </div>
+    <div class="mb-3">
+        <form:label path="preco" for="inputAddress" class="form-label">Preço</form:label>
+        <form:input path="preco" required="required" type="number" class="form-control" step="0.01" min="1"  ></form:input>
+    </div>
+    <div class="mb-3">
+        <form:label path="quantidade" for="inputAddress" class="form-label">Quantidade</form:label>
+        <form:input path="quantidade" required="required" type="number" class="form-control" min="1" ></form:input>
+    </div>
+    <div class="mb-3">
+        <form:label path="descricao" for="inputAddress" class="form-label">Descrição</form:label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+        <form:textarea path="descricao" required="required"  type="text" class="form-control"  ></form:textarea>
+        </textarea>
+    </div>
 
-    <form:label path="preco">Preço</form:label>
-    <form:input path="preco"  type="number"></form:input><br>
-    <br>
 
-    <form:label path="quantidade">Quantidade</form:label>
-    <form:input path="quantidade"  type="number" value=""></form:input><br>
-    <br>
-
-    <form:label path="descricao">Descrição</form:label>
-    <form:input path="descricao"  type="text"></form:input><br>
-    <br>
     <input type="submit" value="Cadastrar" name="Cadastrar" class="btn btn-primary" >
     <a href="/TabaricaApp/home" class="btn btn-secondary"  > VOLTAR </a>
 </form:form>
-
-
-
-
-
-
-    </form>
 
         <c:if test="${not empty retorno}">
             <div class="alert alert-success" role="alert">
@@ -130,16 +144,17 @@
             </div>
         </c:if>
 
-
+        <c:if test="${not empty erro}">
+            <div class="alert alert-danger" role="alert">
+                    ${erro}
+            </div>
+        </c:if>
 
 
     </div>
 </div>
     </div>
         </div>
-
-
-
 
 
 <div class="album py-5 bg-light">
@@ -154,18 +169,26 @@
 
 
                         <div class="card-body">
-                            <p class="card-text"> ${produto.nome} - R$${produto.preco}0    </p>
+                            <c:if test="${produto.ativo == false}">
+                                <p class="card-text"> Este anuncio esta desativado <br> </p>
+                            </c:if>
+                            <p class="card-text"> ${produto.nome} - R$${produto.preco} </p>
                             <p> <small class="text-muted"> ${produto.descricao} </small> </p>
                             <div class="d-flex justify-content-between align-items-center">
 
-
+                                <small class="text-muted"> Quantidade em estoque: ${produto.quantidade}</small>
 
                               <div class="btn-group">
                                 <a  class="btn btn-primary"  href="<c:url value="/produto/editar?id=${produto.id}"/>"  > Editar </a>
+                                  <c:if test="${produto.ativo == false}">
+                                      <a type="button" class="btn btn-danger" href="<c:url value="/produto/ativar?id=${produto.id}"/>" >Ativar Anuncio</a>
+                                  </c:if>
+                                  <c:if test="${produto.ativo == true}">
+                                      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                          Desativar
+                                      </button>
+                                  </c:if>
 
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    Excluir
-                                </button>
 
 
                                 <!-- Modal -->
@@ -173,15 +196,14 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Deseja mesmo excluir?</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel">Deseja mesmo desativar o anuncio?</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <div class="modal-body">
-                                               Essa ação é irreversível.
-                                            </div>
+
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
-                                                <a type="button" class="btn btn-danger" href="<c:url value="/produto/excluir?id=${produto.id}"/>" >Excluir</a>
+
+                                                <a type="button" class="btn btn-danger" href="<c:url value="/produto/desativar?id=${produto.id}"/>" >Destativar</a>
                                             </div>
                                         </div>
                                     </div>

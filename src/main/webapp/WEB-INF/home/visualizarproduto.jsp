@@ -21,17 +21,18 @@
 <nav class="navbar  navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
 
+        <div class="d-flex flex-row-reverse">
+            <div class="p-2"><a class="navbar-brand" href="/TabaricaApp/home"> <img  src="<c:url value="/img/icon.png"/>" /></a> </div>
+        </div>
 
-        <a href="/TabaricaApp/home">  <img src="<c:url value="/img/icon.png"/>" /> <a/>
-            <c:if test="${ empty usuario_logado}">
-            <a class="navbar-brand justify-content-center" href="#">Olá Cliente</a>
-            </c:if>
 
-            <c:if test="${not empty usuario_logado}">
-            <div class="d-flex flex-row-reverse">
-                <div class="p-2"><a class="navbar-brand" href="#">Olá  ${usuario_logado.nome} </a></div>
-            </div>
-            </c:if>
+
+        <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
+                <form action="/TabaricaApp/pesquisa/produto" method="post" class="d-flex mt-3 mt-lg-0" role="search">
+                    <input class="form-control me-2"   name="pesquisa">
+                    <button class="btn btn-outline-success" type="submit">Pesquisar</button>
+                </form>
+        </div>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2">
                 <span class="navbar-toggler-icon"></span>
@@ -43,6 +44,20 @@
                 </div>
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+
+                        <c:if test="${ empty usuario_logado}">
+                        <li class="nav-item">
+                            <a class="navbar-brand " aria-current="page" href="/TabaricaApp/login/"> Olá Cliente </a>
+                        </li>
+                        </c:if>
+
+                        <c:if test="${not empty usuario_logado}">
+                            <li class="nav-item">
+                                <a class="navbar-brand " aria-current="page" href="/TabaricaApp/login/"> Olá  ${usuario_logado.nome} </a>
+                            </li>
+                        </c:if>
+
+
                         <c:if test="${empty usuario_logado}">
                         <li class="nav-item">
                             <a class="nav-link " aria-current="page" href="/TabaricaApp/login/">Fazer login </a>
@@ -62,7 +77,13 @@
                         <c:if test="${ usuario_logado.permissao == 1}">
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/TabaricaApp/produto/listar"> CADASTRAR PRODUTO</a>
+                            <a class="nav-link" href="/TabaricaApp/produto/listar"> Cadastrar produto</a>
+                        </li>
+                        </c:if>
+
+                        <c:if test="${not empty usuario_logado}">
+                        <li class="nav-item">
+                            <a class="nav-link" href="<c:url value="/cadastro/visualizar?email=${usuario_logado.email}"/>"> Conta</a>
                         </li>
                         </c:if>
 
@@ -71,26 +92,6 @@
                             <a class="nav-link"href="/TabaricaApp/login/sair"> Sair</a>
                         </li>
                         </c:if>
-
-
-                        <%--                        <li class="nav-item dropdown">--%>
-                        <%--                            <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarLgDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">--%>
-                        <%--                                Dropdown--%>
-                        <%--                            </a>--%>
-                        <%--                            <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarLgDropdown">--%>
-                        <%--                                <li><a class="dropdown-item" href="#">Action</a></li>--%>
-                        <%--                                <li><a class="dropdown-item" href="#">Another action</a></li>--%>
-                        <%--                                <li>--%>
-                        <%--                                    <hr class="dropdown-divider">--%>
-                        <%--                                </li>--%>
-                        <%--                                <li><a class="dropdown-item" href="/TabaricaApp/login/sair">Sair</a></li>--%>
-                        <%--                            </ul>--%>
-                        <%--                        </li>--%>
-                        <%--                    </ul>--%>
-                        <%--                    <form class="d-flex mt-3 mt-lg-0" role="search">--%>
-                        <%--                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">--%>
-                        <%--                        <button class="btn btn-outline-success" type="submit">Search</button>--%>
-                        <%--                    </form>--%>
                 </div>
             </div>
     </div>
@@ -128,7 +129,7 @@
                                     </c:if>
 
                                 </div>
-                                <small class="text-muted">9 mins</small>
+                                <small class="text-muted"> Quantidade em estoque: ${produto.quantidade}</small>
                             </div>
                         </div>
                     </div>

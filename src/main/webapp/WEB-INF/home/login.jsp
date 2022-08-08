@@ -112,7 +112,10 @@
 <body class="text-center">
 <main class="form-signin w-100 m-auto">
     <form action="/TabaricaApp/login/autenticar" method="post" >
-        <a href="/TabaricaApp/home"><img src="<c:url value="/img/logo-cathafire.png"/>" class="mb-4"  alt="" width="150" height="150"></a>
+        <div>
+        <a href="/TabaricaApp/home">
+        <img src="<c:url value="/img/logo-cathafire.png"/>" class="mb-4"  alt="" width="150" height="150"></a>
+        </div>
         <h1 class="h3 mb-3 fw-normal">Fazer Login</h1>
 
         <div class="form-floating">

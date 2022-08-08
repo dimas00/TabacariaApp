@@ -19,6 +19,7 @@ public class CompraController {
         System.out.println(id_usuario);
         boolean compra = new ProdutoDao().Comprar(id_usuario, id_produto);
 
+
         model.addAttribute("id_usuario", id_usuario);
 
         return "redirect:compras?id_usuario="+id_usuario;

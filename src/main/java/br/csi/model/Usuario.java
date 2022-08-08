@@ -53,7 +53,7 @@ public class Usuario {
     }
 
     public boolean isAtivo() {
-        return true;
+        return ativo;
     }
 
     public void setAtivo(boolean ativo) {

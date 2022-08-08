@@ -15,8 +15,8 @@ public class UsuarioService {
 
 
         try {
-            if(usuario.getEmail().equals(email)&&
-                    usuario.getSenha().equals(senha)){
+            if(usuario.getEmail().equals(email)&&usuario.getSenha().equals(senha) && usuario.isAtivo()){
+                System.out.println(usuario.isAtivo());
                 return usuario;
             }
 

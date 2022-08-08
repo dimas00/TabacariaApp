@@ -20,7 +20,11 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/TabaricaApp/home/">Olá ${usuario_logado.nome}</a>
+
+        <div class="d-flex flex-row-reverse">
+            <div class="p-2"><a class="navbar-brand" href="/TabaricaApp/home"> <img  src="<c:url value="/img/icon.png"/>" /></a> </div>
+        </div>
+
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -29,37 +33,17 @@
                 <h5 class="offcanvas-title" id="offcanvasNavbar2Label">Offcanvas</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
+
+
             <div class="offcanvas-body">
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                     <li class="nav-item">
                         <a class="nav-link " aria-current="page" href="/TabaricaApp/login/">Fazer login </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="<c:url value="/cadastro/redirect"/>"> Cadastre-se</a>
-                    </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="/TabaricaApp/produto/listar"> CADASTRAR PRODUTO</a>
-                    </li>
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarLgDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarLgDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
                 </ul>
-                <form class="d-flex mt-3 mt-lg-0" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+
             </div>
         </div>
     </div>

@@ -1,5 +1,6 @@
 package br.csi.dao;
 
+import br.csi.model.Produto;
 import br.csi.model.Usuario;
 
 import java.sql.*;
@@ -19,12 +20,12 @@ public class UsuarioDao {
 
         try (Connection connection = new ConectaDB().getConexao()) {
 
-            this.sql = "SELECT id_usuario, nome, email, senha, id_permissao  FROM usuario WHERE email = ? ; ";
+            this.sql = "SELECT id_usuario, nome, email, senha, id_permissao, ativo  FROM usuario WHERE email = ? ; ";
             System.out.println(this.sql);
             preparedStatement = connection.prepareStatement(this.sql);
             preparedStatement.setString(1, email);
             resultSet = preparedStatement.executeQuery();
-            System.out.println(email);
+
             while (resultSet.next()) {
                 usuario = new Usuario();
                 usuario.setId(resultSet.getInt("id_usuario"));
@@ -32,9 +33,10 @@ public class UsuarioDao {
                 usuario.setEmail(resultSet.getString("email"));
                 usuario.setSenha(resultSet.getString("senha"));
                 usuario.setPermissao(resultSet.getInt("id_permissao"));
+                usuario.setAtivo(resultSet.getBoolean("ativo"));
 
 
-                System.out.println();
+
 
             }
 
@@ -87,5 +89,40 @@ public class UsuarioDao {
         }
 
         return this.status;
+    }
+
+    public boolean Editar (Usuario usuario) {
+
+
+
+        try(Connection connection = new ConectaDB().getConexao()){
+
+            this.sql = "update usuario set nome = ? , senha = ? , email = ? where id_usuario = ?";
+
+            this.preparedStatement = connection.prepareStatement(this.sql);
+            this.preparedStatement.setString(1, usuario.getNome());
+            this.preparedStatement.setString(2, usuario.getSenha());
+            this.preparedStatement.setString(3, usuario.getEmail());
+            this.preparedStatement.setInt(4, usuario.getId());
+
+
+
+            this.preparedStatement.executeUpdate();
+
+
+            if(this.preparedStatement.getUpdateCount() > 0){
+
+                this.status = "ok";
+                return true;
+            }
+
+
+        }catch (SQLException | ClassNotFoundException e){
+            e.printStackTrace();
+            this.status = "erro";
+            return false;
+        }
+
+        return false;
     }
 }

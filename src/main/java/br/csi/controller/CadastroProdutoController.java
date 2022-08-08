@@ -19,7 +19,7 @@ public class CadastroProdutoController {
 
     @GetMapping("/listar")
     public String addProduto(@ModelAttribute("produto") Produto produto, Model model) {
-        model.addAttribute("produtos", pdao.getProdutos());
+        model.addAttribute("produtos", pdao.getProdutosADM());
 
         return "produtos";
     }

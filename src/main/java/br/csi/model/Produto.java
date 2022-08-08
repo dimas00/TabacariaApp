@@ -8,6 +8,8 @@ public class Produto {
     private int quantidade;
     private String descricao;
 
+    private boolean ativo;
+
 
 
     public int getId() {
@@ -48,5 +50,13 @@ public class Produto {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 }
