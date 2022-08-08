@@ -28,12 +28,12 @@ public class CadastroController {
 
 
         if (new UsuarioService().CadastrarUsuario(usuario)) {
-            redirect.addFlashAttribute("msg", "Cadastro feito com sucesso");
+            redirect.addFlashAttribute("retorno", "Cadastro feito com sucesso");
             return new RedirectView("/login", true);
 
         } else {
-            redirect.addFlashAttribute("msg", "Erro no cadastro");
-            return new RedirectView("/TabaricaApp/cadastro/cadastrar", true);
+            redirect.addFlashAttribute("erro", "Erro no cadastro");
+            return new RedirectView("/cadastro/redirect", true);
         }
 
 

@@ -57,13 +57,13 @@ public class UsuarioDao {
         try(Connection connection = new ConectaDB().getConexao()){
 
             this.sql = "INSERT INTO usuario (nome, email, senha, data_cadastro, ativo, id_permissao )"+
-                    "  values (?, ?, ?, current_date , ? , 2)";
+                    "  values (?, ?, ?, current_date , true , 2)";
 
             this.preparedStatement = connection.prepareStatement(this.sql, preparedStatement.RETURN_GENERATED_KEYS);
             this.preparedStatement.setString(1, usuario.getNome());
             this.preparedStatement.setString(2, usuario.getEmail());
             this.preparedStatement.setString(3, usuario.getSenha());
-            this.preparedStatement.setBoolean(4, usuario.isAtivo());
+
 
 
             this.preparedStatement.execute();
