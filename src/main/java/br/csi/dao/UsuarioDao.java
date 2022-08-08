@@ -21,7 +21,7 @@ public class UsuarioDao {
         try (Connection connection = new ConectaDB().getConexao()) {
 
             this.sql = "SELECT id_usuario, nome, email, senha, id_permissao, ativo  FROM usuario WHERE email = ? ; ";
-            System.out.println(this.sql);
+
             preparedStatement = connection.prepareStatement(this.sql);
             preparedStatement.setString(1, email);
             resultSet = preparedStatement.executeQuery();
@@ -35,11 +35,7 @@ public class UsuarioDao {
                 usuario.setPermissao(resultSet.getInt("id_permissao"));
                 usuario.setAtivo(resultSet.getBoolean("ativo"));
 
-
-
-
             }
-
 
         } catch (SQLException e) {
             e.printStackTrace();

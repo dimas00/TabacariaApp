@@ -9,10 +9,7 @@ public class UsuarioService {
 
     public  Usuario autenticado (String email, String senha){
 
-
-                Usuario usuario = new UsuarioDao().getUsuario(email);
-
-
+                    Usuario usuario = new UsuarioDao().getUsuario(email);
 
         try {
             if(usuario.getEmail().equals(email)&&usuario.getSenha().equals(senha) && usuario.isAtivo()){

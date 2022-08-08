@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/cadastro")
 public class CadastroController {
@@ -50,11 +53,12 @@ public class CadastroController {
     }
 
     @PostMapping("/editar")
-    public String editar(@RequestParam String email, Model model ){
+    public String editar(@RequestParam String email, Model model  ){
 
         Usuario usuario = new UsuarioDao().getUsuario(email);
-
+        System.out.println();
         model.addAttribute("usuario", usuario);
+
 
         return "editar-cadastro";
 
@@ -62,13 +66,16 @@ public class CadastroController {
 
 
     @PostMapping("edicao")
-    public Object editar_cadastro(@ModelAttribute("usuario") Usuario usuario, RedirectAttributes attributes) {
+    public Object editar_cadastro(@ModelAttribute("usuario") Usuario usuario, RedirectAttributes attributes, HttpServletRequest req) {
 
 
         if(new UsuarioDao().Editar(usuario)) {
             System.out.println("cadastrou");
+            System.out.println(usuario.getEmail());
             attributes.addFlashAttribute("retorno","Edição feita com sucesso");
-
+            req.getSession();
+            HttpSession sessao = req.getSession();
+            sessao.setAttribute("usuario_logado", usuario);
             return "redirect:visualizar?email="+usuario.getEmail();
         }else {
 
