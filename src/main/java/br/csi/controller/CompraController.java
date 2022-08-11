@@ -1,12 +1,15 @@
 package br.csi.controller;
 
 import br.csi.dao.ProdutoDao;
+import br.csi.model.Compra;
 import br.csi.model.Produto;
 import br.csi.model.Usuario;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/compra")
@@ -29,7 +32,16 @@ public class CompraController {
     public Object exibirCompra(@RequestParam("id_usuario") int id,  Model model) {
             model.addAttribute("produtos", produto.getCompra(id));
 
+
             return "compras";
+
+
+    }
+
+    @GetMapping("/vendas")
+    public Object exibirVendas(Model model) {
+        model.addAttribute("produtos", produto.getVenda());
+        return "vendas";
 
 
     }

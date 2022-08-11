@@ -12,7 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <title>Produtos</title>
+    <title>Vendas</title>
 
 </head>
 
@@ -56,15 +56,20 @@
                         </c:if>
 
                         <c:if test="${not empty usuario_logado}">
+                        <c:if test="${ usuario_logado.permissao == 2}">
                         <li class="nav-item">
-                            <a class="nav-link active"  href="<c:url value="/compra/compras?id_usuario=${usuario_logado.id}"/>"> Compras</a>
+                            <a class="nav-link" href="<c:url value="/compra/compras?id_usuario=${usuario_logado.id}"/>"> Compras</a>
                         </li>
+                        </c:if>
                         </c:if>
 
                         <c:if test="${ usuario_logado.permissao == 1}">
+                        <li class="nav-item">
+                            <a class="nav-link" href="<c:url value="/compra/vendas?id_usuario=${usuario_logado.id}"/>"> Vendas</a>
+                        </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/TabaricaApp/produto/listar"> Cadastrar Produtos</a>
+                            <a class="nav-link" href="/TabaricaApp/produto/listar"> Cadastrar produto</a>
                         </li>
                         </c:if>
                         <c:if test="${not empty usuario_logado}">
@@ -90,17 +95,15 @@
 
     <c:if test="${ empty produtos}">
 
-        <h1>Você não possui compras</h1>
-
-        <a href="/TabaricaApp/home"> <button type="button"  class="btn btn-success" >Comprar</button> <a/>
-    </c:if>
+        <h1>Não Há venas ainda</h1>
+ </c:if>
 
 
     <div class="album py-5 bg-light">
 
         <c:if test="${not empty produtos}">
 
-            <h1  class="text-center">Compras</h1> <br>
+            <h1  class="text-center">Vendas</h1> <br>
 
         </c:if>
 
@@ -113,12 +116,12 @@
                             <img src="<c:url value="/img/logo-cathafire.png"/>">
                             <div class="card-body">
                                 <p class="card-text"> ${produto.nome} - R$${produto.preco}0 </p>
-                                <p> <small class="text-muted">${produto.descricao} </small> </p>
                                 <div class="d-flex justify-content-between align-items-center">
 <%--                                    <small class="text-muted">Quantidade:  ${produto.quantidade} </small>--%>
                                 </div>
 
-                                <small class="text-muted"> Data da compra: ${produto.data_compra}</small>
+                                <small class="text-muted"> Data da compra: ${produto.data_compra}</small><br>
+                                <small class="text-muted"> Nome do comprador: ${produto.nome_comprador}</small>
 
                             </div>
                         </div>

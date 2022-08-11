@@ -5,6 +5,7 @@
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/home/editar.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/home" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/home/login.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/home" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/home/vendas.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/home" />
       </map>
     </option>
   </component>

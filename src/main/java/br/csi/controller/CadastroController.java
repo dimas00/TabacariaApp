@@ -71,11 +71,11 @@ public class CadastroController {
 
         if(new UsuarioDao().Editar(usuario)) {
             System.out.println("cadastrou");
-            System.out.println(usuario.getEmail());
             attributes.addFlashAttribute("retorno","Edição feita com sucesso");
             req.getSession();
             HttpSession sessao = req.getSession();
             sessao.setAttribute("usuario_logado", usuario);
+            System.out.println(usuario.getNome());
             return "redirect:visualizar?email="+usuario.getEmail();
         }else {
 

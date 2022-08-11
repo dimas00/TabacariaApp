@@ -114,6 +114,7 @@
                     <form:input  path="senha" class="form-control"   id="inputPassword4"   type="password" value="${usuario.senha}" ></form:input>
                     <br>
                     <form:input  path="id"  type="hidden" value="${usuario.id}" ></form:input>
+                    <form:input  path="permissao"  type="hidden" value="${usuario.permissao}" ></form:input>
                     <input type="submit"  class="btn btn-primary" >
                     <a href="<c:url value="/cadastro/visualizar?email=${usuario_logado.email}"/>" class="btn btn-secondary" > VOLTAR </a>
                 </form:form>

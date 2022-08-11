@@ -15,36 +15,6 @@ public class ProdutoDao {
     private String status;
 
 
-    public Produto getProduto(String id_produto) {
-
-        Produto produto = null;
-
-        try (Connection connection = new ConectaDB().getConexao()) {
-
-            this.sql = "SELECT id_produto, nome, quantidade, preco, descricao  FROM usuario WHERE id_produto = ? ; ";
-            System.out.println(this.sql);
-            preparedStatement = connection.prepareStatement(this.sql);
-            preparedStatement.setString(1, id_produto);
-            resultSet = preparedStatement.executeQuery();
-            System.out.println(id_produto);
-            while (resultSet.next()) {
-                produto = new Produto();
-                produto.setId(resultSet.getInt("id_produto"));
-
-
-            }
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        return produto;
-    }
-
-
     public ArrayList<Produto> getProdutos(){
 
         ArrayList<Produto> produtos = new ArrayList<>();
@@ -57,7 +27,7 @@ public class ProdutoDao {
 
             while (resultSet.next()){
                 Produto produto = new Produto();
-                produto.setNome(resultSet.getString("nome"));
+                produto.setNome(resultSet.getString("nomeprod"));
                 produto.setPreco(resultSet.getFloat("preco"));
                 produto.setQuantidade(resultSet.getInt("quantidade"));
                 produto.setId((resultSet.getInt("id_produto")));
@@ -84,7 +54,7 @@ public class ProdutoDao {
 
             while (resultSet.next()){
                 Produto produto = new Produto();
-                produto.setNome(resultSet.getString("nome"));
+                produto.setNome(resultSet.getString("nomeprod"));
                 produto.setPreco(resultSet.getFloat("preco"));
                 produto.setQuantidade(resultSet.getInt("quantidade"));
                 produto.setId((resultSet.getInt("id_produto")));
@@ -116,7 +86,7 @@ public class ProdutoDao {
 
             while (resultSet.next()){
 
-                produto.setNome(resultSet.getString("nome"));
+                produto.setNome(resultSet.getString("nomeprod"));
                 produto.setPreco(resultSet.getFloat("preco"));
                 produto.setQuantidade(resultSet.getInt("quantidade"));
                 produto.setId((resultSet.getInt("id_produto")));
@@ -141,7 +111,7 @@ public class ProdutoDao {
 
 
 
-            this.sql = "SELECT * FROM produtos WHERE nome LIKE ? ";
+            this.sql = "SELECT * FROM produtos WHERE nomeprod ILIKE ? ";
             this.preparedStatement = connection.prepareStatement(this.sql);
             this.preparedStatement.setString(1, '%'+pesquisa+'%');
 
@@ -149,7 +119,7 @@ public class ProdutoDao {
 
             while (resultSet.next()){
                 Produto produto = new Produto();
-                produto.setNome(resultSet.getString("nome"));
+                produto.setNome(resultSet.getString("nomeprod"));
                 produto.setPreco(resultSet.getFloat("preco"));
                 produto.setQuantidade(resultSet.getInt("quantidade"));
                 produto.setId((resultSet.getInt("id_produto")));
@@ -174,7 +144,7 @@ public class ProdutoDao {
 
         try(Connection connection = new ConectaDB().getConexao()){
 
-            this.sql = "INSERT INTO produtos (nome, preco, quantidade, descricao, ativo )"+
+            this.sql = "INSERT INTO produtos (nomeprod, preco, quantidade, descricao, ativo )"+
                     "  values (?, ?, ?,?, true)";
 
             this.preparedStatement = connection.prepareStatement(this.sql, preparedStatement.RETURN_GENERATED_KEYS);
@@ -217,7 +187,7 @@ public class ProdutoDao {
 
         try(Connection connection = new ConectaDB().getConexao()){
 
-            this.sql = "update produtos set nome = ? , preco = ? , quantidade = ?, descricao = ? where id_produto = ?";
+            this.sql = "update produtos set nomeprod = ? , preco = ? , quantidade = ?, descricao = ? where id_produto = ?";
 
             this.preparedStatement = connection.prepareStatement(this.sql);
             this.preparedStatement.setString(1, produto.getNome());
@@ -342,12 +312,12 @@ public class ProdutoDao {
         return false;
     }
 
-    public ArrayList<Produto> getCompra(int id){
+    public ArrayList<Compra> getCompra(int id){
 
-        ArrayList<Produto> produtos = new ArrayList<>();
+        ArrayList<Compra> compras = new ArrayList<>();
         try (Connection connection = new ConectaDB().getConexao()) {
 
-            this.sql = "select produtos.id_produto,produtos.nome, produtos.preco, produtos.quantidade, produtos.descricao from produtos, compra, usuario \n" +
+            this.sql = "select produtos.id_produto,produtos.nomeprod, produtos.preco, produtos.quantidade, produtos.descricao,compra.data_compra, usuario.nome from produtos, compra, usuario \n" +
                     "where produtos.id_produto = compra.id_produto \n" +
                     "and compra.id_usuario = usuario.id_usuario \n" +
                     "and usuario.id_usuario=?";
@@ -357,13 +327,15 @@ public class ProdutoDao {
             this.resultSet = this.preparedStatement.executeQuery();
 
             while (resultSet.next()){
-                Produto produto = new Produto();
-                produto.setNome(resultSet.getString("nome"));
-                produto.setPreco(resultSet.getFloat("preco"));
-                produto.setQuantidade(resultSet.getInt("quantidade"));
-                produto.setId((resultSet.getInt("id_produto")));
-                produto.setDescricao((resultSet.getString("descricao")));
-                produtos.add(produto);
+                Compra compra = new Compra();
+                compra.setNome(resultSet.getString("nomeprod"));
+                compra.setPreco(resultSet.getFloat("preco"));
+                compra.setQuantidade(resultSet.getInt("quantidade"));
+                compra.setId((resultSet.getInt("id_produto")));
+                compra.setDescricao((resultSet.getString("descricao")));
+                compra.setData_compra(resultSet.getDate("data_compra"));
+                compra.setNome_comprador(resultSet.getString("nome"));
+                compras.add(compra);
             }
 
         } catch (SQLException e) {
@@ -371,8 +343,46 @@ public class ProdutoDao {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return produtos;
+        return compras;
     }
+
+    public ArrayList<Compra> getVenda(){
+
+        ArrayList<Compra> compras = new ArrayList<>();
+        try (Connection connection = new ConectaDB().getConexao()) {
+
+            this.sql = "select produtos.id_produto,produtos.nomeprod, produtos.preco, produtos.quantidade, produtos.descricao,compra.data_compra, usuario.nome from produtos, compra, usuario \n" +
+                    "where produtos.id_produto = compra.id_produto \n" +
+                    "and compra.id_usuario = usuario.id_usuario" ;
+            this.preparedStatement = connection.prepareStatement(this.sql);
+            this.resultSet = this.preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                Compra compra = new Compra();
+                compra.setNome(resultSet.getString("nomeprod"));
+                compra.setPreco(resultSet.getFloat("preco"));
+                compra.setQuantidade(resultSet.getInt("quantidade"));
+                compra.setId((resultSet.getInt("id_produto")));
+                compra.setDescricao((resultSet.getString("descricao")));
+                compra.setData_compra(resultSet.getDate("data_compra"));
+                compra.setNome_comprador(resultSet.getString("nome"));
+
+                compras.add(compra);
+
+            }
+
+
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return compras;
+    }
+
 
 
 

@@ -53,7 +53,7 @@
 
                         <c:if test="${not empty usuario_logado}">
                             <li class="nav-item">
-                                <a class="navbar-brand " aria-current="page" href="/TabaricaApp/login/"> Olá  ${usuario_logado.nome} </a>
+                                <a class="navbar-brand " aria-current="page" href="#"> Olá  ${usuario_logado.nome} </a>
                             </li>
                         </c:if>
 
@@ -69,12 +69,17 @@
                         </c:if>
 
                         <c:if test="${not empty usuario_logado}">
+                        <c:if test="${ usuario_logado.permissao == 2}">
                         <li class="nav-item">
                             <a class="nav-link" href="<c:url value="/compra/compras?id_usuario=${usuario_logado.id}"/>"> Compras</a>
                         </li>
                         </c:if>
+                        </c:if>
 
                         <c:if test="${ usuario_logado.permissao == 1}">
+                        <li class="nav-item">
+                            <a class="nav-link" href="<c:url value="/compra/vendas?id_usuario=${usuario_logado.id}"/>"> Vendas</a>
+                        </li>
 
                         <li class="nav-item">
                             <a class="nav-link" href="/TabaricaApp/produto/listar"> Cadastrar produto</a>

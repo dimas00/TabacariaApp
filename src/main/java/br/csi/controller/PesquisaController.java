@@ -32,7 +32,7 @@ public class PesquisaController {
         System.out.println(pesquisa);
         ArrayList<Produto> produtos = new ProdutoDao().getPesquisa(pesquisa);
         model.addAttribute("produtos", produtos);
-
+        System.out.println(produto.getNome());
         return "produtos";
 
 

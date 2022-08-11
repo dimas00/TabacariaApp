@@ -51,18 +51,10 @@
             <div class="offcanvas-body">
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
 
-                    <c:if test="${ empty usuario_logado}">
-                    <li class="nav-item">
-                        <a class="navbar-brand " aria-current="page" href="/TabaricaApp/login/"> Olá Cliente </a>
-                    </li>
-                    </c:if>
-
-                    <c:if test="${not empty usuario_logado}">
-                    <li class="nav-item">
-                        <a class="navbar-brand " aria-current="page" href="/TabaricaApp/login/"> Olá  ${usuario_logado.nome} </a>
-                    </li>
-                    </c:if>
-
+                    <a class="nav-link " aria-current="page" href="/TabaricaApp/home/">  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+                        <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+                    </svg> </a>
 
                     <c:if test="${empty usuario_logado}">
                     <li class="nav-item">
@@ -83,7 +75,7 @@
                     <c:if test="${ usuario_logado.permissao == 1}">
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/TabaricaApp/produto/listar"> Cadastrar produto</a>
+                        <a class="nav-link active " href="/TabaricaApp/produto/listar"> Cadastrar produto</a>
                     </li>
                     </c:if>
 
@@ -171,6 +163,9 @@
                         <div class="card-body">
                             <c:if test="${produto.ativo == false}">
                                 <p class="card-text"> Este anuncio esta desativado <br> </p>
+                            </c:if>
+                            <c:if test="${produto.quantidade <= 0}">
+                                <p class="card-text"> PRODUTO FORA DE ESTOQUE <br> </p>
                             </c:if>
                             <p class="card-text"> ${produto.nome} - R$${produto.preco} </p>
                             <p> <small class="text-muted"> ${produto.descricao} </small> </p>
